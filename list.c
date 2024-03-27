@@ -31,21 +31,12 @@ Node * createNode(void * data) {
 List * createList() {
 
   List * new = (List *)malloc(sizeof(List));
-  assert(new != NULL);
-  new->head = NULL;
-  new->tail = NULL;
-  new->current = NULL;
   return new;
   
 }
-  
-  
-  
-     
-
 
 void * firstList(List * list) {
-    return NULL;
+  
 }
 
 void * nextList(List * list) {
