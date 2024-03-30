@@ -130,16 +130,35 @@ void * popFront(List * list) {
 }
 
 void * popBack(List * list) {
-    list->current = list->tail;
-    return popCurrent(list);
+  if(list->tail == NULL) return NULL;
+  list->current = list->tail;
+  Node * aux = list->tail;
+  list->tail = list->tail->prev;
+  if(list->tail == NULL) list->head = NULL;
+  else list->tail->next = NULL;
+  void * data = aux->data;
+  free(aux);
+  return data;
+  
 }
 
 void * popCurrent(List * list) {
-    return NULL;
+  if(list->current == NULL) return NULL;
+  list->current = list->current->next;
+  Node * aux = list->current;
+  list->current->prev->next = list->current->next;
+  if(list->current->next == NULL) list->tail = list->current->prev;
+  else list->current->next->prev = list->current->prev;
+  void * data = aux->data;
+  free(aux);
+  return data;
+  
 }
 
 void cleanList(List * list) {
-    while (list->head != NULL) {
-        popFront(list);
-    }
+  while(list->head != NULL){
+    
+    popFront(list);
+  }
+  
 }
